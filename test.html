@@ -106,6 +106,18 @@
       }
     }
 
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    @media (max-width: 700px) {
+      table {
+        width: 600px; /* hoặc min-width: 600px; */
+      }
+    }
+
+
 
     /* Filter box */
     .filter-container {
@@ -150,6 +162,8 @@
       <!-- Chart.js placeholder -->
       <canvas id="myChart" style="height:400px;"></canvas>
     </div>
+    
+    <div class="table-responsive">
     <table>
       <thead>
         <tr>
@@ -190,6 +204,11 @@
 		  	</tr>
       </tbody>
     </table>
+    
+    </div>
+
+
+
   </div>
 
   <div id="tab2" class="tab-content">
