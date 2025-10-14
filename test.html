@@ -59,26 +59,21 @@
     .tab-content.active {
       display: block;
     }
-    /* .chart-container {
-      width: 100%;
-      max-width: 80%;
-      margin: 0 auto 24px auto;
-    } */
 
-	.chart-container {
-	width: 100%;
-	max-width: 80%;
-	margin: 0 auto 24px auto;
-	height: 80vh; /* 80% of viewport height */
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	}
-	#myChart {
-	width: 100% !important;
-	height: 100% !important;
-	/* Remove any fixed px height */
-	}
+    .chart-container {
+    width: 100%;
+    max-width: 80%;
+    margin: 0 auto 24px auto;
+    height: 80vh; /* 80% of viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+    #myChart {
+    width: 100% !important;
+    height: 100% !important;
+    /* Remove any fixed px height */
+    }
 
     table {
       width: 80%;
@@ -127,38 +122,20 @@
       gap: 12px; /* khoảng cách giữa label và select */
       justify-content: space-between;
     }
-
-			/* Back to Top btn */
-/* style="padding:10px 24px; font-size:1em; cursor:pointer;"			 */
-/* style="width:100%; display:flex; justify-content:center; margin:24px 0;" */
-#topButton {
-  position: fixed;
-  bottom: 20px; /* distance from bottom */
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 10px 20px;
-  font-size: 16px;
-  background-color: #007BFF;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  z-index: 1000;
-}
-
-		/* #topButton {
-			position: fixed;
-			bottom: 20px;
-			right: 20px;
-			padding: 10px 15px;
-			font-size: 16px;
-			background-color: #007bff;
-			color: white;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-			z-index: 1000;
-		} */
+		#topButton {
+		position: fixed;
+		bottom: 20px; /* distance from bottom */
+		left: 50%;
+		transform: translateX(-50%);
+		padding: 10px 20px;
+		font-size: 16px;
+		background-color: #007BFF;
+		color: white;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		z-index: 1000;
+		}
 		#topButton:hover {
 			background-color: #0056b3;
 		} 
@@ -182,10 +159,10 @@
       </div>
     </div>
 
-  <div id="tab1" class="tab-content active">
-	<div class="chart-container">
-	<canvas id="myChart"></canvas>
-	</div>
+    <div id="tab1" class="tab-content active">
+    <div class="chart-container">
+      <canvas id="myChart"></canvas>
+    </div>
     
     <div class="table-responsive">
       <table>
@@ -329,6 +306,7 @@
 		  	
         </tbody>
       </table>
+      <p style="text-align: center;"><br>Copyright 2025 Silicon Laboratories. All rights reserved.</p><br>
     </div>
   </div>
 
@@ -354,7 +332,7 @@
 				<td>Access Control</td>
 				<td>1</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -364,35 +342,17 @@
 				<td>Appliances</td>
 				<td>3</td>
 				<td>0</td>
-            <td style="text-align: left;">
-              
-              
-                <a href="https://github.com/SiliconLabsSoftware/zigbee_applications/blob/master//custom_cpcd_LED_example/README.md" target="_blank">Zigbee - Custom CPCd Command Project with LED Example </a><br>
-              
-                <a href="https://github.com/SiliconLabsSoftware/zigbee_applications/blob/master//zigbee_battery_monitor/README.md" target="_blank">Zigbee - Battery Monitor </a><br>
-              
-                <a href="https://github.com/SiliconLabsSoftware/zigbee_applications/blob/master//zigbee_door_lock_tutorial/README.md" target="_blank">Zigbee - Door Lock Tutorial </a><br>
-              
-                <a href="https://github.com/SiliconLabsSoftware/zigbee_applications/blob/master//zigbee_human_detection/README.md" target="_blank">Zigbee - AI/ML Human Detection </a><br>
-              
-                <a href="https://github.com/SiliconLabsSoftware/zigbee_applications/blob/master//zigbee_mfglib_extension/README.md" target="_blank">Zigbee - Manufacturing Library Extension </a><br>
-              
-                <a href="https://github.com/SiliconLabsSoftware/zigbee_applications/blob/master//zigbee_rtc_time_sync/README.md" target="_blank">Zigbee - RTC Time Synchronization </a><br>
-              
-                <a href="https://github.com/SiliconLabsSoftware/zigbee_applications/blob/master//zigbee_sed_rht_sensor/README.md" target="_blank">Zigbee - RHT Si7021 Sleepy End-Device and Gateway </a><br>
-              
-                <a href="https://github.com/SiliconLabsSoftware/zigbee_applications/blob/master//zigbee_sed_z3switch/README.md" target="_blank">Optimization on EM2 Current Consumption of the Zigbee - Soc Switch </a><br>
-              
-                <a href="https://github.com/SiliconLabsSoftware/zigbee_applications/blob/master//zigbee_smart_lighting/README.md" target="_blank">Zigbee - Smart Lighting With Motion Sensor PIR </a><br>
-              
-            </td>
+				<td style="text-align: left;">
+					
+					
+				</td>
 		  	</tr>
 		  	
 		  	<tr>
 				<td>Asset Tracking</td>
 				<td>1</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -402,7 +362,7 @@
 				<td>Battery-Powered Tools</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -412,7 +372,7 @@
 				<td>Battery Storage</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -422,7 +382,7 @@
 				<td>Circuit Breakers</td>
 				<td>3</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -432,7 +392,7 @@
 				<td>Commercial Lighting</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -442,7 +402,7 @@
 				<td>Connected Outdoor</td>
 				<td>1</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -452,7 +412,7 @@
 				<td>Direction Finding</td>
 				<td>1</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -462,7 +422,7 @@
 				<td>Electric Submetering</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -472,7 +432,7 @@
 				<td>Electronic Shelf Labels</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -482,7 +442,7 @@
 				<td>Entertainment Devices</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -492,7 +452,7 @@
 				<td>EV Charging Stations</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -502,7 +462,7 @@
 				<td>Factory Automation</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -512,7 +472,7 @@
 				<td>Human Machine Interface</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -522,7 +482,7 @@
 				<td>Industrial Wearables</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -532,7 +492,7 @@
 				<td>IoT Gateways</td>
 				<td>3</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -542,7 +502,7 @@
 				<td>LED Lighting</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -552,7 +512,7 @@
 				<td>Loss Prevention</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -562,7 +522,7 @@
 				<td>Portable Medical Devices</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -572,7 +532,7 @@
 				<td>Predictive Maintenance</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -582,7 +542,7 @@
 				<td>Process Automation</td>
 				<td>3</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -592,7 +552,7 @@
 				<td>Security Cameras</td>
 				<td>1</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -602,7 +562,7 @@
 				<td>Sensors</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -612,7 +572,7 @@
 				<td>Smart Agriculture</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -622,7 +582,7 @@
 				<td>Smart Buildings</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -632,7 +592,7 @@
 				<td>Smart Hospitals</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -642,7 +602,7 @@
 				<td>Smart HVAC</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -652,7 +612,7 @@
 				<td>Smart Locks</td>
 				<td>1</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -662,7 +622,7 @@
 				<td>Smart Metering</td>
 				<td>1</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -672,7 +632,7 @@
 				<td>Smart Polar PV Systems</td>
 				<td>3</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -682,7 +642,7 @@
 				<td>Smart Wearable Devices</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -692,7 +652,7 @@
 				<td>Street Lighting</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -702,7 +662,7 @@
 				<td>Switches</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -712,7 +672,7 @@
 				<td>Wi-Fi Access Points</td>
 				<td>2</td>
 				<td>0</td>
-				<td>
+				<td style="text-align: left;">
 					
 					
 				</td>
@@ -720,6 +680,7 @@
 		  	                
         </tbody>
       </table>
+      <p style="text-align: center;"><br>Copyright 2025 Silicon Laboratories. All rights reserved.</p><br>
     </div>
 
     <div>
@@ -742,9 +703,10 @@
     });
 
     // Example Chart.js setup
-    const repo_labels = ["Bluetooth Applications", "Circuit Python Applications", "Energy Harvesting Applications", "Matter Applications", "Platform Applications", "Third Party Hardware drivers Extension", "Zephyr Applications", "Zigbee Applications", "OpenThread Applications", "Open PCB Prototypes", "Open 3D Printing Design", "Peripheral WiseConnect", "BoltOn", "Arduino"];
-    const datas = [84, 9, 7, 8, 146, 211, 9, 47, 4, 1, 1, 7, 9, 92];
-    const last_update = ["2025-09-01", "2025-07-04", "2025-07-10", "2025-06-18", "2025-09-01", "2025-08-07", "2025-09-01", "2025-09-19", "2025-07-04", "2025-08-07", "2025-06-18", "2025-09-19", "2025-08-28", "2025-07-28"];    
+    
+    const repo_labels = ["Bluetooth Applications", "Circuit Python Applications", "Energy Harvesting Applications", "Matter Applications", "Platform Applications", "Third Party Hardware drivers Extension", "Zephyr Applications", "Zigbee Applications", "OpenThread Applications", "Peripheral WiseConnect", "BoltOn", "Arduino"];
+    const datas = [84, 9, 7, 8, 146, 211, 9, 47, 4, 7, 9, 92];
+    const last_update = ["2025-09-01", "2025-07-04", "2025-07-10", "2025-06-18", "2025-09-01", "2025-08-07", "2025-09-01", "2025-09-19", "2025-07-04", "2025-09-19", "2025-08-28", "2025-07-28"];    
     const ctx = document.getElementById('myChart').getContext('2d');
     new Chart(ctx, {
       type: 'bar',
@@ -781,7 +743,7 @@
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false, // allow container to control height
+        maintainAspectRatio: false,
         height: 300,
         plugins: {
           legend: {
