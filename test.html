@@ -59,11 +59,26 @@
     .tab-content.active {
       display: block;
     }
-    .chart-container {
+    /* .chart-container {
       width: 100%;
       max-width: 80%;
       margin: 0 auto 24px auto;
-    }
+    } */
+
+	.chart-container {
+	width: 100%;
+	max-width: 80%;
+	margin: 0 auto 24px auto;
+	height: 80vh; /* 80% of viewport height */
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	}
+	#myChart {
+	width: 100% !important;
+	height: 100% !important;
+	/* Remove any fixed px height */
+	}
 
     table {
       width: 80%;
@@ -136,7 +151,7 @@
   <div id="tab1" class="tab-content active">
     <div class="chart-container">
       <!-- Chart.js placeholder -->
-      <canvas id="myChart" style="height:600px;"></canvas>
+      <canvas id="myChart" style="height:80%;"></canvas>
     </div>
     
     <div class="table-responsive">
@@ -733,7 +748,7 @@
       },
       options: {
         responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: false, // allow container to control height
         height: 300,
         plugins: {
           legend: {
