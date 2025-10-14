@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tabbed Chart & Table Webpage</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f6f6f6;
+    }
+    header {
+      background: #1976d2;
+      color: #fff;
+      padding: 16px 24px;
+      text-align: center;
+      font-size: 1.5em;
+      letter-spacing: 0.5px;
+    }
+    .tabs {
+      display: flex;
+      background: #eee;
+      border-bottom: 1px solid #ccc;
+    }
+    .tab {
+      flex: 1;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .tab.active {
+      background: #fff;
+      color: #1976d2;
+      border-bottom: 2px solid #1976d2;
+    }
+    .tab-content {
+      display: none;
+      padding: 24px 16px;
+      background: #fff;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .chart-container {
+      width: 100%;
+      max-width: 80%;
+      margin: 0 auto 24px auto;
+    }
+    /* table {
+      width: 80%;
+      border-collapse: collapse;
+      margin-bottom: 16px;
+      background: #fafafa;
+    } */
+    table {
+    width: 80%;
+    margin: 0 auto 16px auto; /* Centers the table horizontally */
+    border-collapse: collapse;
+    background: #fafafa;
+    }
+
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background: #1976d2;
+      color: #fff;
+    }
+    @media (max-width: 700px) {
+      header {
+        font-size: 1.2em;
+        padding: 12px;
+      }
+      .tab-content {
+        padding: 12px 4px;
+      }
+      .chart-container {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    My Responsive Webpage
+  </header>
+  <div class="tabs">
+    <div class="tab active" data-tab="tab1">Tab 1</div>
+    <div class="tab" data-tab="tab2">Tab 2</div>
+  </div>
+  <div id="tab1" class="tab-content active">
+    <div class="chart-container">
+      <!-- Chart.js placeholder -->
+      <canvas id="myChart" style="height:400px;"></canvas>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Column A</th>
+          <th>Column B</th>
+          <th>Column C</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Row 1A</td><td>Row 1B</td><td>Row 1C</td></tr>
+        <tr><td>Row 2A</td><td>Row 2B</td><td>Row 2C</td></tr>
+        <tr><td>Row 3A</td><td>Row 3B</td><td>Row 3C</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="tab2" class="tab-content">
+    <table>
+      <thead>
+        <tr>
+          <th>Column X</th>
+          <th>Column Y</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Row 1X</td><td>Row 1Y</td></tr>
+        <tr><td>Row 2X</td><td>Row 2Y</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
+
+    // Example Chart.js setup
+    const ctx = document.getElementById('myChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green'],
+        datasets: [{
+          label: 'Sample Data',
+          data: [12, 100, 3, 5],
+          backgroundColor: [
+            'rgba(255,99,132,0.5)',
+            'rgba(54,162,235,0.5)',
+            'rgba(255,206,86,0.5)',
+            'rgba(75,192,192,0.5)',
+          ],
+          borderColor: [
+            'rgba(255,99,132,1)',
+            'rgba(54,162,235,1)',
+            'rgba(255,206,86,1)',
+            'rgba(75,192,192,1)',
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        height: 300
+      }
+    });
+  </script>
+</body>
+</html>
