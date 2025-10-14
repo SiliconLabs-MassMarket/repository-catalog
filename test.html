@@ -1,23 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Tabbed Chart & Table Webpage</title>
-  <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="chart.js"></script>
+	<link rel="icon" href="doc/favicon.ico"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">  
+    <title>Mass Market Examples</title>
+    <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       background: #f6f6f6;
     }
-    header {
+    /* header {
       background: #1976d2;
       color: #fff;
       padding: 16px 24px;
       text-align: center;
       font-size: 1.5em;
       letter-spacing: 0.5px;
+    } */
+    /* Header format */
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
+    .header img {
+        height: 50px;
+        margin-right: 20px;
+    }    
+    .highlight {
+        color: #d32f2f; /* red */
+    }
+
+
+
     .tabs {
       display: flex;
       background: #eee;
@@ -83,16 +105,46 @@
         max-width: 100%;
       }
     }
+
+
+    /* Filter box */
+    .filter-container {
+        /* display: none; */
+        align-items: right;
+        gap: 12px; /* khoảng cách giữa label và select */
+        justify-content: space-between;
+    }
+
   </style>
 </head>
 <body>
-  <header>
-    My Responsive Webpage
-  </header>
-  <div class="tabs">
-    <div class="tab active" data-tab="tab1">Tab 1</div>
-    <div class="tab" data-tab="tab2">Tab 2</div>
-  </div>
+  <!-- <header>
+    Sample App Categorization
+  </header> -->
+  	<div class="header">
+		<img src="doc/silabs_logo.png">
+		<h1>
+			<span class="highlight">Sample App Categorization</span>
+		</h1>
+  	</div>
+
+    <div class="tabs">
+        <div class="tab active" data-tab="tab1">
+            <i class="fas fa-home"></i> Repositories Content
+        </div>
+        <div class="tab" data-tab="tab2">
+            <i class="fas fa-th-list"></i> Applications List
+        </div>
+
+        <!-- <div class="tab active" data-target="#repository">
+            <i class="fas fa-home"></i> MMTE Repositories Content
+        </div>
+        
+        <div class="tab" data-target="#applications">
+            <i class="fas fa-th-list"></i> Applications List
+        </div>         -->
+    </div>
+
   <div id="tab1" class="tab-content active">
     <div class="chart-container">
       <!-- Chart.js placeholder -->
@@ -101,33 +153,400 @@
     <table>
       <thead>
         <tr>
-          <th>Column A</th>
-          <th>Column B</th>
-          <th>Column C</th>
+            <th>No.</th>
+            <th>Repository</th>
+            <th>Technology</th>
+            <th>No of Examples</th>
+            <th>Last Update</th>
+            <th>Release Version</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>Row 1A</td><td>Row 1B</td><td>Row 1C</td></tr>
-        <tr><td>Row 2A</td><td>Row 2B</td><td>Row 2C</td></tr>
-        <tr><td>Row 3A</td><td>Row 3B</td><td>Row 3C</td></tr>
+		  	<tr>
+				<td>0</td>
+				<td><a href="https://github.com/SiliconLabsSoftware/bluetooth_applications" target="_blank">Bluetooth Applications</a></td>
+				<td>Bluetooth</td>
+				<td>84</td>
+				<td>2025-09-01</td>
+				<td>v3.2.0</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>1</td>
+				<td><a href="https://github.com/SiliconLabsSoftware/circuitpython_applications" target="_blank">Circuit Python Applications</a></td>
+				<td>Platform</td>
+				<td>9</td>
+				<td>2025-07-04</td>
+				<td>v1.3.1</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>2</td>
+				<td><a href="https://github.com/SiliconLabsSoftware/energy_harvesting_applications" target="_blank">Energy Harvesting Applications</a></td>
+				<td>Platform, Bluetooth, Zigbee, SubGHz</td>
+				<td>7</td>
+				<td>2025-07-10</td>
+				<td>v1.2.0</td>
+		  	</tr>
       </tbody>
     </table>
   </div>
+
   <div id="tab2" class="tab-content">
-    <table>
+    <table id="tab2-table">
       <thead>
         <tr>
-          <th>Column X</th>
-          <th>Column Y</th>
+        <th style="text-align:left;">
+          <label for="tab2-filter-select" style="font-weight:bold;">Applications</label>
+          <select id="tab2-filter-select" style="margin-left:10px;">
+            <!-- Options will be filled by JS -->
+          </select>
+        </th>
+				<th>MM Rank</th>
+				<th>No of Examples</th>
+				<th>Example Link</th>
         </tr>
       </thead>
       <tbody>
-        <tr><td>Row 1X</td><td>Row 1Y</td></tr>
-        <tr><td>Row 2X</td><td>Row 2Y</td></tr>
+<tr>
+				<td>Access Control</td>
+				<td>1</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Appliances</td>
+				<td>3</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Asset Tracking</td>
+				<td>1</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Battery-Powered Tools</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Battery Storage</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Circuit Breakers</td>
+				<td>3</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Commercial Lighting</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Connected Outdoor</td>
+				<td>1</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Direction Finding</td>
+				<td>1</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Electric Submetering</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Electronic Shelf Labels</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Entertainment Devices</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>EV Charging Stations</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Factory Automation</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Human Machine Interface</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Industrial Wearables</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>IoT Gateways</td>
+				<td>3</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>LED Lighting</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Loss Prevention</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Portable Medical Devices</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Predictive Maintenance</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Process Automation</td>
+				<td>3</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Security Cameras</td>
+				<td>1</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Sensors</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Smart Agriculture</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Smart Buildings</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Smart Hospitals</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Smart HVAC</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Smart Locks</td>
+				<td>1</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Smart Metering</td>
+				<td>1</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Smart Polar PV Systems</td>
+				<td>3</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Smart Wearable Devices</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>
+		  	
+		  	<tr>
+				<td>Street Lighting</td>
+				<td>2</td>
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  	</tr>               
       </tbody>
     </table>
+    <div style="width:100%; display:flex; justify-content:center; margin:24px 0;">
+      <button id="back-to-top-btn" style="padding:10px 24px; font-size:1em; cursor:pointer;">
+        Back to Top
+      </button>
+    </div>    
   </div>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <script src="chart.js"></script>
   <script>
     // Tab switching
     document.querySelectorAll('.tab').forEach(tab => {
@@ -144,15 +563,26 @@
     new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green'],
+        labels: ['Bluetooth Applications', 'Energy Harvesting Applications', 'Yellow', 'Green'],
         datasets: [{
-          label: 'Sample Data',
+          label: 'Total Number of Examples per Repository',
           data: [12, 100, 3, 5],
           backgroundColor: [
-            'rgba(255,99,132,0.5)',
-            'rgba(54,162,235,0.5)',
-            'rgba(255,206,86,0.5)',
-            'rgba(75,192,192,0.5)',
+            'skyblue',
+            'lightgreen',
+            'salmon',
+            'gold',
+            'plum',
+            'tomato',
+            'mediumseagreen',
+            'cornflowerblue',
+            'khaki',
+            'orchid',
+            'lightcoral',
+            'turquoise',
+            'peachpuff',
+            'slateblue',
+            'palegreen'
           ],
           borderColor: [
             'rgba(255,99,132,1)',
@@ -166,9 +596,76 @@
       options: {
         responsive: true,
         maintainAspectRatio: false,
-        height: 300
+        height: 300,
+        plugins: {
+          legend: {
+            display: false // Ẩn chú thích (legend)
+          },
+          title: {
+            display: true,
+            text: 'Total Number of Examples per Repository'
+          },
+          tooltip: {
+            titleColor: '#222',      // Màu tiêu đề tooltip
+            bodyColor: '#222',       // Màu thân tooltip
+            backgroundColor: '#fff', // Nền cho tooltip, nếu muốn
+          }          
+        },
+        scales: {
+          x: {
+            ticks: {
+              color: '#222', // Màu chữ trên trục X
+            }
+          },
+          y: {
+            ticks: {
+              color: '#222', // Màu chữ trên trục Y
+            }
+          }
+        }        
       }
     });
   </script>
+
+  <script>
+  // Dropdown filter logic for Tab 2
+  function createDropdownFilter() {
+    const rows = Array.from(document.querySelectorAll('#tab2-table tbody tr'));
+    const select = document.getElementById('tab2-filter-select');
+    // Find unique values in first column
+    const values = [...new Set(rows.map(row => row.cells[0].textContent))];
+    select.innerHTML = '';
+    const allOption = document.createElement('option');
+    allOption.value = 'All';
+    allOption.textContent = 'All';
+    select.appendChild(allOption);
+    values.forEach(val => {
+      const option = document.createElement('option');
+      option.value = val;
+      option.textContent = val;
+      select.appendChild(option);
+    });
+    select.addEventListener('change', function() {
+      const selected = this.value;
+      rows.forEach(row => {
+        if (selected === 'All' || row.cells[0].textContent === selected) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', createDropdownFilter);
+  </script>
+
+  <script>
+  // Back to Top button logic
+  document.getElementById('back-to-top-btn').addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  });
+  </script>
+
 </body>
 </html>
