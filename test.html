@@ -128,6 +128,40 @@
       justify-content: space-between;
     }
 
+			/* Back to Top btn */
+/* style="padding:10px 24px; font-size:1em; cursor:pointer;"			 */
+/* style="width:100%; display:flex; justify-content:center; margin:24px 0;" */
+#topButton {
+  position: fixed;
+  bottom: 20px; /* distance from bottom */
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+		/* #topButton {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			padding: 10px 15px;
+			font-size: 16px;
+			background-color: #007bff;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			z-index: 1000;
+		} */
+		#topButton:hover {
+			background-color: #0056b3;
+		} 
   </style>
 </head>
 
@@ -688,8 +722,8 @@
       </table>
     </div>
 
-    <div style="width:100%; display:flex; justify-content:center; margin:24px 0;">
-      <button id="back-to-top-btn" style="padding:10px 24px; font-size:1em; cursor:pointer;">
+    <div>
+      <button id="topButton">
         Back to Top
       </button>
     </div>    
@@ -814,7 +848,7 @@
 
   <script>
   // Back to Top button logic
-  document.getElementById('back-to-top-btn').addEventListener('click', function() {
+  document.getElementById('topButton').addEventListener('click', function() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   });
   </script>
