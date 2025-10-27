@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="chart.js"></script>
+  <link rel="icon" href="doc/favicon.ico"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Mass Market Examples</title>
+  <style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #d3d3e2;
+			margin: 0;
+			padding: 0;
+		}
+
+		h1 {
+			text-align: center;
+			margin-top: 30px;
+		}
+
+		.tabs {
+			display: flex;
+			justify-content: center;
+			margin-top: 20px;
+		}
+
+		.tab {
+			padding: 10px 20px;
+			background-color: #f1f1f1;
+			border-radius: 5px 5px 0 0;
+			cursor: pointer;
+			transition: background-color 0.3s;
+			color: #6a1b9a; /* purple */
+		}
+
+		.tab:not(:last-child) {
+			margin-right: 10px;
+		}
+
+		.tab:hover {
+			background-color: #e0e0e0;
+		}
+
+		.tab-content {
+			display: none;
+			padding: 20px;
+			background-color: #fff;
+			border-radius: 0 0 5px 5px;
+			box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+			max-width: 1000px;
+			margin: -5px auto 30px;
+		}
+
+		.active-tab {
+			background-color: #fff;
+			font-weight: bold;
+		}
+
+		.active-content {
+			display: block;
+		}
+
+		.header {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 30px;
+			background-color: #ffffff;
+			box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		}
+
+		.header img {
+			height: 50px;
+			margin-right: 20px;
+		}    
+		.highlight {
+			color: #d32f2f; /* red */
+		}
+		.filter-container {
+			display: flex;
+			align-items: center;
+			gap: 12px; /* khoảng cách giữa label và select */
+			justify-content: space-between;
+		}
+		#topButton {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			padding: 10px 15px;
+			font-size: 16px;
+			background-color: #007bff;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			z-index: 1000;
+		}
+
+		#topButton:hover {
+			background-color: #0056b3;
+		}  	   
+  </style>
+</head>
+<body>
+  <div class="header">
+		<img src="doc/silabs_logo.png">
+		<h1>
+			<span class="highlight">Sample App Categorization</span>
+		</h1>
+  </div>
+
+  <p style="text-align: center;">This Dashboard will track and categorize all Mass Market examples on GitHub by Application Segments and by Technology.</p>
+
+  <div class="tabs">
+		<div class="tab active-tab" data-target="#repository">
+			<i class="fas fa-home"></i> MMTE Repositories Content
+		</div>
+		
+		<div class="tab" data-target="#applications">
+			<i class="fas fa-th-list"></i> Applications List
+		</div>
+  </div>
+
+  <div id="repository" class="tab-content active-content">
+		<h2>MMTE Repositories Content</h2>
+		<canvas id="exampleChart" width="1000" height="400"></canvas>
+
+		<br><br>
+	  <table border="1" cellpadding="8">
+		<thead>
+		  <tr>
+				<th>No.</th>
+				<th>Repository</th>
+				<th>Technology</th>
+				<th>No of Examples</th>
+				<th>Last Update</th>
+				<th>Release Version</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  
+		  <tr>
+				<td>0</td>
+				<td><a href="https://github.com/SiliconLabsSoftware/bluetooth_applications" target="_blank">Bluetooth Applications</a></td>
+				<td>Bluetooth</td>
+				<td>84</td>
+				<td>2025-09-01</td>
+				<td>v3.2.0</td>
+		  </tr>
+		  
+		  <tr>
+				<td>1</td>
+				<td><a href="https://github.com/SiliconLabsSoftware/circuitpython_applications" target="_blank">Circuit Python Applications</a></td>
+				<td>Platform</td>
+				<td>9</td>
+				<td>2025-07-04</td>
+				<td>v1.3.1</td>
+		  </tr>
+		  
+		  <tr>
+				<td>2</td>
+				<td><a href="https://github.com/SiliconLabsSoftware/energy_harvesting_applications" target="_blank">Energy Harvesting Applications</a></td>
+				<td>Platform, Bluetooth, Zigbee, SubGHz</td>
+				<td>7</td>
+				<td>2025-07-10</td>
+				<td>v1.2.0</td>
+		  </tr>
+		  
+		  <tr>
+				<td>3</td>
+				<td><a href="https://github.com/SiliconLabsSoftware/matter_applications" target="_blank">Matter Applications</a></td>
+				<td>Matter</td>
+				<td>8</td>
+				<td>2025-06-18</td>
+				<td></td>
+		  </tr>
+		  
+		  <tr>
+				<td>4</td>
+				<td><a href="https://github.com/SiliconLabsSoftware/platform_applications" target="_blank">Platform Applications</a></td>
+				<td>Platform (EFM32, EFR32)</td>
+				<td>152</td>
+				<td>2025-10-16</td>
+				<td>v2.10.0</td>
+		  </tr>
+		  
+		  <tr>
+				<td>5</td>
+				<td><a href="https://github.com/SiliconLabsSoftware/third_party_hw_drivers_extension" target="_blank">Third Party Hardware drivers Extension</a></td>
+				<td>Platform (EFM32, EFR32, 917)</td>
+				<td>211</td>
+				<td>2025-08-07</td>
+				<td>v4.4.0</td>
+		  </tr>
+		  
+		  <tr>
+				<td>6</td>
+				<td><a href="https://github.com/SiliconLabsSoftware/zephyr_applications" target="_blank">Zephyr Applications</a></td>
+				<td>Platform (EFM32, EFR32), Bluetooth</td>
+				<td>9</td>
+				<td>2025-09-01</td>
+				<td>v2.1.0</td>
+		  </tr>
+		  
+		  <tr>
+				<td>7</td>
+				<td><a href="https://github.com/SiliconLabsSoftware/zigbee_applications" target="_blank">Zigbee Applications</a></td>
+				<td>Zigbee</td>
+				<td>50</td>
+				<td>2025-10-16</td>
+				<td></td>
+		  </tr>
+		  
+		  <tr>
+				<td>8</td>
+				<td><a href="https://github.com/SiliconLabsSoftware/openthread_applications" target="_blank">OpenThread Applications</a></td>
+				<td>Thread</td>
+				<td>4</td>
+				<td>2025-07-04</td>
+				<td>v1.0.1</td>
+		  </tr>
+		  
+		  <tr>
+				<td>9</td>
+				<td><a href="https://github.com/SiliconLabsSoftware/open-pcb-prototypes" target="_blank">Open PCB Prototypes</a></td>
+				<td>Platform, Hardware</td>
+				<td>1</td>
+				<td>2025-08-07</td>
+				<td></td>
+		  </tr>
+		  
+		  <tr>
+				<td>10</td>
+				<td><a href="https://github.com/SiliconLabsSoftware/open-3d-print-prototypes" target="_blank">Open 3D Printing Design</a></td>
+				<td>Platform, Hardware</td>
+				<td>1</td>
+				<td>2025-06-18</td>
+				<td></td>
+		  </tr>
+		  
+		  <tr>
+				<td>11</td>
+				<td><a href="https://github.com/SiliconLabsSoftware/peripheral-examples-wiseconnect-sdk" target="_blank">Peripheral WiseConnect</a></td>
+				<td>Platform</td>
+				<td>7</td>
+				<td>2025-09-19</td>
+				<td>v1.1.0</td>
+		  </tr>
+		  
+		  <tr>
+				<td>12</td>
+				<td><a href="https://github.com/SiliconLabsSoftware/boltON" target="_blank">BoltOn</a></td>
+				<td>Bluetooth</td>
+				<td>9</td>
+				<td>2025-08-28</td>
+				<td>1.2.0</td>
+		  </tr>
+		  
+		  <tr>
+				<td>13</td>
+				<td><a href="https://github.com/SiliconLabs/arduino" target="_blank">Arduino</a></td>
+				<td>Platform, Bluetooth, Matter</td>
+				<td>92</td>
+				<td>2025-07-28</td>
+				<td>3.0.0</td>
+		  </tr>
+		  
+		</tbody>
+	  </table>    
+	</div>
+
+  <div id="applications" class="tab-content">
+	<h2>Applications Examples List</h2>
+	  <table id="myTable" border="1" cellpadding="8">
+		<thead>
+		  <tr>
+				<th>
+					<div class="filter-container">
+					<span>Applications</span>
+					<select id="nameFilter" class="filter-select" onchange="filterTable()">
+						<option value="">All</option>
+					</select>
+					</div>
+				</th>
+				<!-- <th>MM Rank</th> -->
+				<th>No of Examples</th>
+				<th>Example Link</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  
+		  <tr>
+				<td>Access Control</td>
+				<!-- <td>1</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Appliances</td>
+				<!-- <td>3</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Asset Tracking</td>
+				<!-- <td>1</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Battery-Powered Tools</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Battery Storage</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Circuit Breakers</td>
+				<!-- <td>3</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Commercial Lighting</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Connected Outdoor</td>
+				<!-- <td>1</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Direction Finding</td>
+				<!-- <td>1</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Electric Submetering</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Electronic Shelf Labels</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Entertainment Devices</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>EV Charging Stations</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Factory Automation</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Human Machine Interface</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Industrial Wearables</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>IoT Gateways</td>
+				<!-- <td>3</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>LED Lighting</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Loss Prevention</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Portable Medical Devices</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Predictive Maintenance</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Process Automation</td>
+				<!-- <td>3</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Security Cameras</td>
+				<!-- <td>1</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Sensors</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Smart Agriculture</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Smart Buildings</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Smart Hospitals</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Smart HVAC</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Smart Locks</td>
+				<!-- <td>1</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Smart Metering</td>
+				<!-- <td>1</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Smart Polar PV Systems</td>
+				<!-- <td>3</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Smart Wearable Devices</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Street Lighting</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Switches</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		  
+		  <tr>
+				<td>Wi-Fi Access Points</td>
+				<!-- <td>2</td> -->
+				<td>0</td>
+				<td>
+					
+					
+				</td>
+		  </tr>
+		             
+		</tbody>
+	  </table>    
+		<p><br>Copyright 2025 Silicon Laboratories. All rights reserved.</p><br>
+		<!-- Scroll to Top Button -->
+		<button id="topButton" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
+			Go to Top
+		</button> 		
+	</div>
+	
+  <script>
+		const tabs = document.querySelectorAll('.tab');
+		const contents = document.querySelectorAll('.tab-content');
+
+		tabs.forEach(tab => {
+			tab.addEventListener('click', () => {
+			// Remove active classes
+			tabs.forEach(t => t.classList.remove('active-tab'));
+			contents.forEach(c => c.classList.remove('active-content'));
+
+			// Add active classes to clicked tab and corresponding content
+			tab.classList.add('active-tab');
+			const target = document.querySelector(tab.getAttribute('data-target'));
+			target.classList.add('active-content');
+			});
+		});
+  </script>
+
+	<script>
+		const labels = ["Bluetooth Applications", "Circuit Python Applications", "Energy Harvesting Applications", "Matter Applications", "Platform Applications", "Third Party Hardware drivers Extension", "Zephyr Applications", "Zigbee Applications", "OpenThread Applications", "Open PCB Prototypes", "Open 3D Printing Design", "Peripheral WiseConnect", "BoltOn", "Arduino"];
+		const datas = [84, 9, 7, 8, 152, 211, 9, 50, 4, 1, 1, 7, 9, 92];
+		const last_update = ["2025-09-01", "2025-07-04", "2025-07-10", "2025-06-18", "2025-10-16", "2025-08-07", "2025-09-01", "2025-10-16", "2025-07-04", "2025-08-07", "2025-06-18", "2025-09-19", "2025-08-28", "2025-07-28"];
+		const ctx = document.getElementById('exampleChart').getContext('2d');
+		const exampleChart = new Chart(ctx, {
+		type: 'bar',
+		data: {
+			labels: labels,
+			datasets: [{
+			label: 'Number of Examples',
+			data: datas,
+			backgroundColor: ['skyblue', 'lightgreen', 'salmon'],
+			borderColor: ['#888', '#888', '#888'],
+			borderWidth: 1
+			}]
+		},
+		options: {
+			responsive: false,
+			plugins: {
+			legend: { display: false },
+			tooltip: {
+				callbacks: {
+				afterLabel: function(context) {
+					const index = context.dataIndex;
+					return 'Last Update: ' + last_update[index];
+				}
+				}
+			},
+			title: {
+				display: true,
+				text: 'Total Number of Examples per Repository'
+			}
+			},
+			scales: {
+			y: {
+				beginAtZero: true,
+				ticks: { stepSize: 10 }
+			}
+			}
+		}
+		});
+  </script>
+
+	<script>
+		function populateFilter() {
+			const rows = document.querySelectorAll("#myTable tbody tr");
+			const filter = document.getElementById("nameFilter");
+			const names = new Set();
+
+			rows.forEach(row => {
+			names.add(row.cells[0].textContent.trim());
+			});
+
+			names.forEach(name => {
+			const option = document.createElement("option");
+			option.value = name;
+			option.textContent = name;
+			filter.appendChild(option);
+			});
+		}
+
+		function filterTable() {
+			const filterValue = document.getElementById("nameFilter").value.toLowerCase();
+			const rows = document.querySelectorAll("#myTable tbody tr");
+
+			rows.forEach(row => {
+			const cellText = row.cells[0].textContent.toLowerCase();
+			row.style.display = filterValue === "" || cellText === filterValue ? "" : "none";
+			});
+		}
+
+		populateFilter();
+	</script>
+
+</body>
+</html>
