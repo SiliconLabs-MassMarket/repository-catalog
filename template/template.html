@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="chart.js"></script>
+  <link rel="icon" href="doc/favicon.ico"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Mass Market Examples</title>
+  <style>
+		body {
+			font-family: Arial, sans-serif;
+			background-color: #d3d3e2;
+			margin: 0;
+			padding: 0;
+		}
+
+		h1 {
+			text-align: center;
+			margin-top: 30px;
+		}
+
+		.tabs {
+			display: flex;
+			justify-content: center;
+			margin-top: 20px;
+		}
+
+		.tab {
+			padding: 10px 20px;
+			background-color: #f1f1f1;
+			border-radius: 5px 5px 0 0;
+			cursor: pointer;
+			transition: background-color 0.3s;
+			color: #6a1b9a; /* purple */
+		}
+
+		.tab:not(:last-child) {
+			margin-right: 10px;
+		}
+
+		.tab:hover {
+			background-color: #e0e0e0;
+		}
+
+		.tab-content {
+			display: none;
+			padding: 20px;
+			background-color: #fff;
+			border-radius: 0 0 5px 5px;
+			box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+			max-width: 1000px;
+			margin: -5px auto 30px;
+		}
+
+		.active-tab {
+			background-color: #fff;
+			font-weight: bold;
+		}
+
+		.active-content {
+			display: block;
+		}
+
+		.header {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 30px;
+			background-color: #ffffff;
+			box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+		}
+
+		.header img {
+			height: 50px;
+			margin-right: 20px;
+		}    
+		.highlight {
+			color: #d32f2f; /* red */
+		}
+		.filter-container {
+			display: flex;
+			align-items: center;
+			gap: 12px; /* khoảng cách giữa label và select */
+			justify-content: space-between;
+		}
+		#topButton {
+			position: fixed;
+			bottom: 20px;
+			right: 20px;
+			padding: 10px 15px;
+			font-size: 16px;
+			background-color: #007bff;
+			color: white;
+			border: none;
+			border-radius: 5px;
+			cursor: pointer;
+			z-index: 1000;
+		}
+
+		#topButton:hover {
+			background-color: #0056b3;
+		}  	   
+  </style>
+</head>
+<body>
+  <div class="header">
+		<img src="doc/silabs_logo.png">
+		<h1>
+			<span class="highlight">Sample App Categorization</span>
+		</h1>
+  </div>
+
+  <p style="text-align: center;">This Dashboard will track and categorize all Mass Market examples on GitHub by Application Segments and by Technology.</p>
+
+  <div class="tabs">
+		<div class="tab active-tab" data-target="#repository">
+			<i class="fas fa-home"></i> MMTE Repositories Content
+		</div>
+		
+		<div class="tab" data-target="#applications">
+			<i class="fas fa-th-list"></i> Applications List
+		</div>
+  </div>
+
+  <div id="repository" class="tab-content active-content">
+		<h2>MMTE Repositories Content</h2>
+		<canvas id="exampleChart" width="1000" height="400"></canvas>
+
+		<br><br>
+	  <table border="1" cellpadding="8">
+		<thead>
+		  <tr>
+				<th>No.</th>
+				<th>Repository</th>
+				<th>Technology</th>
+				<th>No of Examples</th>
+				<th>Last Update</th>
+				<th>Release Version</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  {% for repo in repositories %}
+		  <tr>
+				<td>{{ repo.no }}</td>
+				<td><a href="{{ repo.repo_url }}" target="_blank">{{ repo.repo_name }}</a></td>
+				<td>{{ repo.tech }}</td>
+				<td>{{ repo.num_examples }}</td>
+				<td>{{ repo.last_update }}</td>
+				<td>{{ repo.release_ver }}</td>
+		  </tr>
+		  {% endfor %}
+		</tbody>
+	  </table>    
+	</div>
+
+  <div id="applications" class="tab-content">
+	<h2>Applications Examples List</h2>
+	  <table id="myTable" border="1" cellpadding="8">
+		<thead>
+		  <tr>
+				<th>
+					<div class="filter-container">
+					<span>Applications</span>
+					<select id="nameFilter" class="filter-select" onchange="filterTable()">
+						<option value="">All</option>
+					</select>
+					</div>
+				</th>
+				<!-- <th>MM Rank</th> -->
+				<th>No of Examples</th>
+				<th>Example Link</th>
+		  </tr>
+		</thead>
+		<tbody>
+		  {% for app in applications %}
+		  <tr>
+				<td>{{ app.type }}</td>
+				<!-- <td>{{ app.rank }}</td> -->
+				<td>{{ app.no_examples }}</td>
+				<td>
+					{% set filtered_examples = examples | selectattr("app_type", "equalto", app.type) | list %}
+					{% for exp in filtered_examples %}
+					<a href="{{ exp.example_url }}" target="_blank">{{ exp.example_name }}</a><br>
+					{% endfor %}
+				</td>
+		  </tr>
+		  {% endfor %}           
+		</tbody>
+	  </table>    
+		<p><br>Copyright 2025 Silicon Laboratories. All rights reserved.</p><br>
+		<!-- Scroll to Top Button -->
+		<button id="topButton" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
+			Go to Top
+		</button> 		
+	</div>
+	
+  <script>
+		const tabs = document.querySelectorAll('.tab');
+		const contents = document.querySelectorAll('.tab-content');
+
+		tabs.forEach(tab => {
+			tab.addEventListener('click', () => {
+			// Remove active classes
+			tabs.forEach(t => t.classList.remove('active-tab'));
+			contents.forEach(c => c.classList.remove('active-content'));
+
+			// Add active classes to clicked tab and corresponding content
+			tab.classList.add('active-tab');
+			const target = document.querySelector(tab.getAttribute('data-target'));
+			target.classList.add('active-content');
+			});
+		});
+  </script>
+
+	<script>
+		const labels = {{ repositories | map(attribute='repo_name') | list | tojson }};
+		const datas = {{ repositories | map(attribute='num_examples') | list | tojson }};
+		const last_update = {{ repositories | map(attribute='last_update') | list | tojson }};
+		const ctx = document.getElementById('exampleChart').getContext('2d');
+		const exampleChart = new Chart(ctx, {
+		type: 'bar',
+		data: {
+			labels: labels,
+			datasets: [{
+			label: 'Number of Examples',
+			data: datas,
+			backgroundColor: ['skyblue', 'lightgreen', 'salmon'],
+			borderColor: ['#888', '#888', '#888'],
+			borderWidth: 1
+			}]
+		},
+		options: {
+			responsive: false,
+			plugins: {
+			legend: { display: false },
+			tooltip: {
+				callbacks: {
+				afterLabel: function(context) {
+					const index = context.dataIndex;
+					return 'Last Update: ' + last_update[index];
+				}
+				}
+			},
+			title: {
+				display: true,
+				text: 'Total Number of Examples per Repository'
+			}
+			},
+			scales: {
+			y: {
+				beginAtZero: true,
+				ticks: { stepSize: 10 }
+			}
+			}
+		}
+		});
+  </script>
+
+	<script>
+		function populateFilter() {
+			const rows = document.querySelectorAll("#myTable tbody tr");
+			const filter = document.getElementById("nameFilter");
+			const names = new Set();
+
+			rows.forEach(row => {
+			names.add(row.cells[0].textContent.trim());
+			});
+
+			names.forEach(name => {
+			const option = document.createElement("option");
+			option.value = name;
+			option.textContent = name;
+			filter.appendChild(option);
+			});
+		}
+
+		function filterTable() {
+			const filterValue = document.getElementById("nameFilter").value.toLowerCase();
+			const rows = document.querySelectorAll("#myTable tbody tr");
+
+			rows.forEach(row => {
+			const cellText = row.cells[0].textContent.toLowerCase();
+			row.style.display = filterValue === "" || cellText === filterValue ? "" : "none";
+			});
+		}
+
+		populateFilter();
+	</script>
+
+</body>
+</html>

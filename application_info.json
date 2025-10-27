@@ -1,0 +1,142 @@
+[
+    {
+        "app_type":"Access Control",
+        "mm_rank": 1
+    },
+    {
+        "app_type":"Appliances",
+        "mm_rank": 3
+    },  
+    {
+        "app_type":"Asset Tracking",
+        "mm_rank": 1
+    },
+    {
+        "app_type":"Battery-Powered Tools",
+        "mm_rank": 2
+    },  
+    {
+        "app_type":"Battery Storage",
+        "mm_rank": 2
+    },
+    {
+        "app_type":"Circuit Breakers",
+        "mm_rank": 3
+    },
+    {
+        "app_type":"Commercial Lighting",
+        "mm_rank": 2
+    },
+    {
+        "app_type":"Connected Outdoor",
+        "mm_rank": 1
+    },  
+    {
+        "app_type":"Direction Finding",
+        "mm_rank": 1
+    },
+    {
+        "app_type":"Electric Submetering",
+        "mm_rank": 2
+    },  
+    {
+        "app_type":"Electronic Shelf Labels",
+        "mm_rank": 2
+    },
+    {
+        "app_type":"Entertainment Devices",
+        "mm_rank": 2
+    },  
+    {
+        "app_type":"EV Charging Stations",
+        "mm_rank": 2
+    },
+    {
+        "app_type":"Factory Automation",
+        "mm_rank": 2
+    },
+    {
+        "app_type":"Human Machine Interface",
+        "mm_rank": 2
+    },
+    {
+        "app_type":"Industrial Wearables",
+        "mm_rank": 2
+    },  
+    {
+        "app_type":"IoT Gateways",
+        "mm_rank": 3
+    },
+    {
+        "app_type":"LED Lighting",
+        "mm_rank": 2
+    },
+    {
+        "app_type":"Loss Prevention",
+        "mm_rank": 2
+    },
+    {
+        "app_type":"Portable Medical Devices",
+        "mm_rank": 2
+    },  
+    {
+        "app_type":"Predictive Maintenance",
+        "mm_rank": 2
+    },
+    {
+        "app_type":"Process Automation",
+        "mm_rank": 3
+    },
+    {
+        "app_type":"Security Cameras",
+        "mm_rank": 1
+    },  
+    {
+        "app_type":"Sensors",
+        "mm_rank": 2
+    },
+    {
+        "app_type":"Smart Agriculture",
+        "mm_rank": 2
+    },
+    {
+        "app_type":"Smart Buildings",
+        "mm_rank": 2
+    },
+    {
+        "app_type":"Smart Hospitals",
+        "mm_rank": 2
+    },  
+    {
+        "app_type":"Smart HVAC",
+        "mm_rank": 2
+    },
+    {
+        "app_type":"Smart Locks",
+        "mm_rank": 1
+    },
+    {
+        "app_type":"Smart Metering",
+        "mm_rank": 1
+    },
+    {
+        "app_type":"Smart Polar PV Systems",
+        "mm_rank": 3
+    },
+    {
+        "app_type":"Smart Wearable Devices",
+        "mm_rank": 2
+    },  
+    {
+        "app_type":"Street Lighting",
+        "mm_rank": 2
+    },
+    {
+        "app_type":"Switches",
+        "mm_rank": 2
+    },
+    {
+        "app_type":"Wi-Fi Access Points",
+        "mm_rank": 2
+    }                                 
+]
