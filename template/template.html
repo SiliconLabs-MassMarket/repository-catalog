@@ -2,144 +2,181 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="chart.js"></script>
   <link rel="icon" href="doc/favicon.ico"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">  
   <title>Mass Market Examples</title>
   <style>
-		body {
-			font-family: Arial, sans-serif;
-			background-color: #d3d3e2;
-			margin: 0;
-			padding: 0;
-		}
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f6f6f6;
+    }
 
-		h1 {
-			text-align: center;
-			margin-top: 30px;
-		}
+    /* Header format */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      background-color: #ffffff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    .header img {
+        height: 50px;
+        margin-right: 20px;
+    }    
+    .highlight {
+        color: #d32f2f; /* red */
+    }
 
-		.tabs {
-			display: flex;
-			justify-content: center;
-			margin-top: 20px;
-		}
 
-		.tab {
-			padding: 10px 20px;
-			background-color: #f1f1f1;
-			border-radius: 5px 5px 0 0;
-			cursor: pointer;
-			transition: background-color 0.3s;
-			color: #6a1b9a; /* purple */
-		}
 
-		.tab:not(:last-child) {
-			margin-right: 10px;
-		}
+    .tabs {
+      display: flex;
+      background: #eee;
+      border-bottom: 1px solid #ccc;
+    }
+    .tab {
+      flex: 1;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .tab.active {
+      background: #fff;
+      color: #1976d2;
+      border-bottom: 2px solid #1976d2;
+    }
+    .tab-content {
+      display: none;
+      padding: 24px 16px;
+      background: #fff;
+    }
+    .tab-content.active {
+      display: block;
+    }
 
-		.tab:hover {
-			background-color: #e0e0e0;
-		}
+    .chart-container {
+    width: 100%;
+    max-width: 80%;
+    margin: 0 auto 24px auto;
+    height: 80vh; /* 80% of viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+    #myChart {
+    width: 100% !important;
+    height: 100% !important;
+    /* Remove any fixed px height */
+    }
 
-		.tab-content {
-			display: none;
-			padding: 20px;
-			background-color: #fff;
-			border-radius: 0 0 5px 5px;
-			box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-			max-width: 1000px;
-			margin: -5px auto 30px;
-		}
+    table {
+      width: 80%;
+      margin: 0 auto 16px auto; /* Centers the table horizontally */
+      border-collapse: collapse;
+      background: #fafafa;
+    }
 
-		.active-tab {
-			background-color: #fff;
-			font-weight: bold;
-		}
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+    th {
+      background: #1976d2;
+      color: #fff;
+    }
+    @media (max-width: 700px) {
+      header {
+        font-size: 1.2em;
+        padding: 12px;
+      }
+      .tab-content {
+        padding: 12px 4px;
+      }
+      .chart-container {
+        max-width: 100%;
+      }
+    }
 
-		.active-content {
-			display: block;
-		}
+    .table-responsive {
+      width: 100%;
+      overflow-x: auto;
+    }
 
-		.header {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			padding: 30px;
-			background-color: #ffffff;
-			box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-		}
+    @media (max-width: 700px) {
+      table {
+        width: 600px; /* hoặc min-width: 600px; */
+      }
+    }
 
-		.header img {
-			height: 50px;
-			margin-right: 20px;
-		}    
-		.highlight {
-			color: #d32f2f; /* red */
-		}
-		.filter-container {
-			display: flex;
-			align-items: center;
-			gap: 12px; /* khoảng cách giữa label và select */
-			justify-content: space-between;
-		}
-		#topButton {
-			position: fixed;
-			bottom: 20px;
-			right: 20px;
-			padding: 10px 15px;
-			font-size: 16px;
-			background-color: #007bff;
-			color: white;
-			border: none;
-			border-radius: 5px;
-			cursor: pointer;
-			z-index: 1000;
-		}
-
-		#topButton:hover {
-			background-color: #0056b3;
-		}  	   
+    /* Filter box */
+    .filter-container {
+      /* display: none; */
+      align-items: right;
+      gap: 12px; /* khoảng cách giữa label và select */
+      justify-content: space-between;
+    }
+    #topButton {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      display: none; /* Hidden by default */
+      z-index: 1000;
+    }
+    #topButton:hover {
+        background-color: #0056b3;
+    } 
   </style>
 </head>
+
 <body>
-  <div class="header">
+  	<div class="header">
 		<img src="doc/silabs_logo.png">
 		<h1>
 			<span class="highlight">Sample App Categorization</span>
 		</h1>
-  </div>
+  	</div>
 
-  <p style="text-align: center;">This Dashboard will track and categorize all Mass Market examples on GitHub by Application Segments and by Technology.</p>
+    <div class="tabs">
+      <div class="tab active" data-tab="tab1">
+        <i class="fas fa-home"></i> Repositories Content
+      </div>
+      <div class="tab" data-tab="tab2">
+        <i class="fas fa-th-list"></i> Applications List
+      </div>
+    </div>
 
-  <div class="tabs">
-		<div class="tab active-tab" data-target="#repository">
-			<i class="fas fa-home"></i> MMTE Repositories Content
-		</div>
-		
-		<div class="tab" data-target="#applications">
-			<i class="fas fa-th-list"></i> Applications List
-		</div>
-  </div>
-
-  <div id="repository" class="tab-content active-content">
-		<h2>MMTE Repositories Content</h2>
-		<canvas id="exampleChart" width="1000" height="400"></canvas>
-
-		<br><br>
-	  <table border="1" cellpadding="8">
-		<thead>
-		  <tr>
-				<th>No.</th>
-				<th>Repository</th>
-				<th>Technology</th>
-				<th>No of Examples</th>
-				<th>Last Update</th>
-				<th>Release Version</th>
-		  </tr>
-		</thead>
-		<tbody>
+    <div id="tab1" class="tab-content active">
+    <div class="chart-container">
+      <canvas id="myChart"></canvas>
+    </div>
+    
+    <div class="table-responsive">
+      <table>
+        <thead>
+          <tr>
+            <th>No.</th>
+            <th>Repository</th>
+            <th>Technology</th>
+            <th>No of Examples</th>
+            <th>Last Update</th>
+            <th>Release Version</th>
+          </tr>
+        </thead>
+        <tbody>
 		  {% for repo in repositories %}
 		  <tr>
 				<td>{{ repo.no }}</td>
@@ -149,30 +186,31 @@
 				<td>{{ repo.last_update }}</td>
 				<td>{{ repo.release_ver }}</td>
 		  </tr>
-		  {% endfor %}
-		</tbody>
-	  </table>    
-	</div>
+		  {% endfor %}		  	
+		  	
+        </tbody>
+      </table>
+      <p style="text-align: center;"><br>Copyright 2025 Silicon Laboratories. All rights reserved.</p><br>
+    </div>
+  </div>
 
-  <div id="applications" class="tab-content">
-	<h2>Applications Examples List</h2>
-	  <table id="myTable" border="1" cellpadding="8">
-		<thead>
-		  <tr>
-				<th>
-					<div class="filter-container">
-					<span>Applications</span>
-					<select id="nameFilter" class="filter-select" onchange="filterTable()">
-						<option value="">All</option>
-					</select>
-					</div>
-				</th>
-				<!-- <th>MM Rank</th> -->
-				<th>No of Examples</th>
-				<th>Example Link</th>
-		  </tr>
-		</thead>
-		<tbody>
+  <div id="tab2" class="tab-content">
+    <div class="table-responsive">
+      <table id="tab2-table">
+        <thead>
+          <tr>
+          <th style="text-align:center;">
+            <label for="tab2-filter-select" style="font-weight:bold;">Applications</label>
+            <select id="tab2-filter-select" style="margin-left:10px;">
+              <!-- Options will be filled by JS -->
+            </select>
+          </th>
+          <!-- <th>MM Rank</th> -->
+          <th>No of Examples</th>
+          <th>Example Link</th>
+          </tr>
+        </thead>
+        <tbody>
 		  {% for app in applications %}
 		  <tr>
 				<td>{{ app.type }}</td>
@@ -185,108 +223,150 @@
 					{% endfor %}
 				</td>
 		  </tr>
-		  {% endfor %}           
-		</tbody>
-	  </table>    
-		<p><br>Copyright 2025 Silicon Laboratories. All rights reserved.</p><br>
-		<!-- Scroll to Top Button -->
-		<button id="topButton" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });">
-			Go to Top
-		</button> 		
-	</div>
-	
+		  {% endfor %}   		  	
+        </tbody>
+      </table>
+      <p style="text-align: center;"><br>Copyright 2025 Silicon Laboratories. All rights reserved.</p><br>
+    </div>
+
+    <div>
+        <button id="topButton" onclick="scrollToTop()">Back to Top</button>
+    </div>    
+  </div>
+
+  <script src="chart.js"></script>
   <script>
-		const tabs = document.querySelectorAll('.tab');
-		const contents = document.querySelectorAll('.tab-content');
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', function() {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(tab.dataset.tab).classList.add('active');
+      });
+    });
 
-		tabs.forEach(tab => {
-			tab.addEventListener('click', () => {
-			// Remove active classes
-			tabs.forEach(t => t.classList.remove('active-tab'));
-			contents.forEach(c => c.classList.remove('active-content'));
-
-			// Add active classes to clicked tab and corresponding content
-			tab.classList.add('active-tab');
-			const target = document.querySelector(tab.getAttribute('data-target'));
-			target.classList.add('active-content');
-			});
-		});
+    // Example Chart.js setup
+    
+    const repo_labels = ["Bluetooth Applications", "Circuit Python Applications", "Energy Harvesting Applications", "Matter Applications", "Platform Applications", "Third Party Hardware drivers Extension", "Zephyr Applications", "Zigbee Applications", "OpenThread Applications", "Peripheral WiseConnect", "BoltOn", "Arduino"];
+    const datas = [84, 9, 7, 8, 146, 211, 9, 47, 4, 7, 9, 92];
+    const last_update = ["2025-09-01", "2025-07-04", "2025-07-10", "2025-06-18", "2025-09-01", "2025-08-07", "2025-09-01", "2025-09-19", "2025-07-04", "2025-09-19", "2025-08-28", "2025-07-28"];    
+    const ctx = document.getElementById('myChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: repo_labels,
+        datasets: [{
+          label: 'Total Number of Examples per Repository',
+          data: datas,
+          backgroundColor: [
+            'skyblue',
+            'lightgreen',
+            'salmon',
+            'gold',
+            'plum',
+            'tomato',
+            'mediumseagreen',
+            'cornflowerblue',
+            'khaki',
+            'orchid',
+            'lightcoral',
+            'turquoise',
+            'peachpuff',
+            'slateblue',
+            'palegreen'
+          ],
+          borderColor: [
+            'rgba(255,99,132,1)',
+            'rgba(54,162,235,1)',
+            'rgba(255,206,86,1)',
+            'rgba(75,192,192,1)',
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        height: 300,
+        plugins: {
+          legend: {
+            display: false // Ẩn chú thích (legend)
+          },
+          title: {
+            display: true,
+            text: 'Total Number of Examples per Repository'
+          },
+          tooltip: {
+            titleColor: '#222',      // Màu tiêu đề tooltip
+            bodyColor: '#222',       // Màu thân tooltip
+            backgroundColor: '#fff', // Nền cho tooltip, nếu muốn
+          }          
+        },
+        scales: {
+          x: {
+            ticks: {
+              color: '#222', // Màu chữ trên trục X
+            }
+          },
+          y: {
+            ticks: {
+              color: '#222', // Màu chữ trên trục Y
+            }
+          }
+        }        
+      }
+    });
   </script>
 
-	<script>
-		const labels = {{ repositories | map(attribute='repo_name') | list | tojson }};
-		const datas = {{ repositories | map(attribute='num_examples') | list | tojson }};
-		const last_update = {{ repositories | map(attribute='last_update') | list | tojson }};
-		const ctx = document.getElementById('exampleChart').getContext('2d');
-		const exampleChart = new Chart(ctx, {
-		type: 'bar',
-		data: {
-			labels: labels,
-			datasets: [{
-			label: 'Number of Examples',
-			data: datas,
-			backgroundColor: ['skyblue', 'lightgreen', 'salmon'],
-			borderColor: ['#888', '#888', '#888'],
-			borderWidth: 1
-			}]
-		},
-		options: {
-			responsive: false,
-			plugins: {
-			legend: { display: false },
-			tooltip: {
-				callbacks: {
-				afterLabel: function(context) {
-					const index = context.dataIndex;
-					return 'Last Update: ' + last_update[index];
-				}
-				}
-			},
-			title: {
-				display: true,
-				text: 'Total Number of Examples per Repository'
-			}
-			},
-			scales: {
-			y: {
-				beginAtZero: true,
-				ticks: { stepSize: 10 }
-			}
-			}
-		}
-		});
+  <script>
+  // Dropdown filter logic for Tab 2
+  function createDropdownFilter() {
+    const rows = Array.from(document.querySelectorAll('#tab2-table tbody tr'));
+    const select = document.getElementById('tab2-filter-select');
+    // Find unique values in first column
+    const values = [...new Set(rows.map(row => row.cells[0].textContent))];
+    select.innerHTML = '';
+    const allOption = document.createElement('option');
+    allOption.value = 'All';
+    allOption.textContent = 'All';
+    select.appendChild(allOption);
+    values.forEach(val => {
+      const option = document.createElement('option');
+      option.value = val;
+      option.textContent = val;
+      select.appendChild(option);
+    });
+    select.addEventListener('change', function() {
+      const selected = this.value;
+      rows.forEach(row => {
+        if (selected === 'All' || row.cells[0].textContent === selected) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', createDropdownFilter);
   </script>
 
-	<script>
-		function populateFilter() {
-			const rows = document.querySelectorAll("#myTable tbody tr");
-			const filter = document.getElementById("nameFilter");
-			const names = new Set();
+  <script>
+    const btn = document.getElementById("topButton");
 
-			rows.forEach(row => {
-			names.add(row.cells[0].textContent.trim());
-			});
+    window.onscroll = function() {
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        btn.style.display = "block";
+      } else {
+        btn.style.display = "none";
+      }
+    };
 
-			names.forEach(name => {
-			const option = document.createElement("option");
-			option.value = name;
-			option.textContent = name;
-			filter.appendChild(option);
-			});
-		}
-
-		function filterTable() {
-			const filterValue = document.getElementById("nameFilter").value.toLowerCase();
-			const rows = document.querySelectorAll("#myTable tbody tr");
-
-			rows.forEach(row => {
-			const cellText = row.cells[0].textContent.toLowerCase();
-			row.style.display = filterValue === "" || cellText === filterValue ? "" : "none";
-			});
-		}
-
-		populateFilter();
-	</script>
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
 
 </body>
 </html>
