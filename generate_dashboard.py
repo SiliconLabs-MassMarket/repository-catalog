@@ -154,7 +154,7 @@ def got_latest_release(repo_url):
 ########################################################################################################
 repositories = []
 def got_repositories():
-	json_file = os.path.join(curdir, "repository_info_test.json")
+	json_file = os.path.join(curdir, "repository_info.json")
 	with open(json_file, "r") as f:
 		json_data = json.load(f)
 
@@ -265,7 +265,7 @@ def got_type_shield_io(owner, repo, default_branch, folder):
 
 examples = []
 def got_example_shield():
-	json_file = os.path.join(curdir, "repository_info_test.json")
+	json_file = os.path.join(curdir, "repository_info.json")
 	with open(json_file, "r") as f:
 		json_data = json.load(f)
 
@@ -314,7 +314,7 @@ applications = []
 def got_applications():
 	
 
-	json_file = os.path.join(curdir, "application_info_test.json")
+	json_file = os.path.join(curdir, "application_info.json")
 	with open(json_file, "r") as f:
 		json_data = json.load(f)
 
