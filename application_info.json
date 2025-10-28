@@ -12,7 +12,7 @@
         "mm_rank": 1
     },
     {
-        "app_type":"Battery-Powered Tools",
+        "app_type":"Battery Powered Tools",
         "mm_rank": 2
     },  
     {
@@ -136,7 +136,7 @@
         "mm_rank": 2
     },
     {
-        "app_type":"Wi-Fi Access Points",
+        "app_type":"WiFi Access Points",
         "mm_rank": 2
     }                                 
 ]
