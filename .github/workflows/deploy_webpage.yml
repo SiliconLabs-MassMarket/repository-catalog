@@ -3,8 +3,10 @@ name: app-dashboard
 on:
   workflow_dispatch:
   
-  # schedule:
-  #   - cron: "0 0 * * *"
+  schedule:
+    # Runs every day at 00:00 UTC
+    - cron: '5 0 * * *'
+
 jobs:
   app-dashboard:
     runs-on: ubuntu-latest
