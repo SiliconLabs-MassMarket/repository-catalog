@@ -1,18 +1,4 @@
 
-"""
-Thời gian chạy scan API khá lâu đấy, cân nhắc optimize =  clone repos
-
-Lấy header1 (#) readme.md nếu có issue, có thể chuyển qua lấy label trong templates.xml
-
-
-Phần Shield lên để ntn?
-Way 1: Tạo 1 header trong README , CI PR checking sẽ auto add
-Way 2: Trong templates.xml
-
-và truyền nó vào data trong Chart.js, thì biểu đồ sẽ hiển thị NaN vì:
-Chart.js không thể vẽ biểu đồ với dữ liệu kiểu chuỗi (string) trong phần data của datasets.
-"""
-
 import os
 import sys
 import requests
@@ -26,8 +12,11 @@ import json
 curdir = os.path.dirname(os.path.abspath(__file__))
 
 PAT_TOKEN = sys.argv[1]
+TEST_BRANCH = sys.argv[2]
+
 api_headers = {
-    "Authorization": f"Bearer {PAT_TOKEN}"
+    'Authorization': f'token {PAT_TOKEN}',
+    'Accept': 'application/vnd.github.v3.raw'
 }
 
 excluded = {'.github', 'deprecated', 'doc'}
@@ -67,31 +56,33 @@ def got_last_update(repo_url):
 		sys.exit(1)
 
 def count_file_extensions(owner, repo, branch, extension):
-    """Fetch all file extensions in a GitHub repo using the Git Trees API."""
-    api_url = f"https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}?recursive=1"
-    headers = {'Accept': 'application/vnd.github.v3+json'}
-    response = requests.get(api_url, headers=headers)
+	"""Fetch all file extensions in a GitHub repo using the Git Trees API."""
+	api_url = f"https://api.github.com/repos/{owner}/{repo}/git/trees/{branch}?recursive=1"
+	headers = {'Accept': 'application/vnd.github.v3+json'}
+	response = requests.get(api_url, headers=headers)
 
-    if response.status_code != 200:
-        raise Exception(f"GitHub API error: {response.status_code} - {response.text}")
+	if response.status_code != 200:
+		raise Exception(f"GitHub API error: {response.status_code} - {response.text}")
 
-    data = response.json()
-    files = [item['path'] for item in data.get('tree', []) if item['type'] == 'blob']
-    extensions = [f.split('.')[-1] for f in files if '.' in f]
+	data = response.json()
+	files = [item['path'] for item in data.get('tree', []) if item['type'] == 'blob']
+	extensions = [f.split('.')[-1] for f in files if '.' in f]
 
-    for ext, count in Counter(extensions).items():
-        # print(f".{ext}: {count}")    
-        if ext == extension:
-            return count
+	for ext, count in Counter(extensions).items():
+		# print(f".{ext}: {count}")    
+		if ext == extension:
+			return count
 		
 def got_number_examples(repo_url, scan_in_folder, default_branch):
 	owner, repo = split_repo_info(repo_url)
 
 	# If repo contain templates.xml then scan .slcp files
 	if repo.find("energy_harvesting_applications") != -1:
-		url = f"https://raw.githubusercontent.com/{owner}/{repo}/{default_branch}/energy_harvesting_templates.xml"
+		# url = f"https://raw.githubusercontent.com/{owner}/{repo}/{default_branch}/energy_harvesting_templates.xml"
+		url = f'https://api.github.com/repos/{owner}/{repo}/contents/energy_harvesting_templates.xml?ref={default_branch}'
 	else:
-		url = f"https://raw.githubusercontent.com/{owner}/{repo}/{default_branch}/templates.xml"
+		# url = f"https://raw.githubusercontent.com/{owner}/{repo}/{default_branch}/templates.xml"
+		url = f'https://api.github.com/repos/{owner}/{repo}/contents/templates.xml?ref={default_branch}'
 	# print(url)
 	response = requests.get(url, headers=api_headers)
 	if response.status_code == 200:	
@@ -150,11 +141,31 @@ def got_latest_release(repo_url):
 	
 	return latest_version
 
+def check_branch_existing(owner, repo, branch, token=None):
+	"""
+	Check if branch exists using PyGithub library
+	"""
+	try:
+		g = Github(token) if token else Github()
+		repository = g.get_repo(f"{owner}/{repo}")
+		
+		# Try to get the branch
+		repository.get_branch(branch)
+		return True
+		
+	except Exception as e:
+		if "Branch not found" in str(e) or "404" in str(e):
+			return False
+		else:
+			print(f"Error: {e}")
+			return False
+
+# Install with: pip install PyGithub
 ########################################################################################################
 ########################################################################################################
 repositories = []
 def got_repositories():
-	json_file = os.path.join(curdir, "app/repository_info.json")
+	json_file = os.path.join(curdir, "data/repository_info_test.json")
 	with open(json_file, "r") as f:
 		json_data = json.load(f)
 
@@ -163,7 +174,13 @@ def got_repositories():
 		repo_url = json_data[id]["url"]
 		scan_in_folder = json_data[id]["examples_folder"]
 		owner, repo = split_repo_info(repo_url)
-		default_branch = got_default_branch(owner, repo)
+
+		check_branch = check_branch_existing(owner, repo, TEST_BRANCH, PAT_TOKEN)
+		if check_branch == False:
+			default_branch = got_default_branch(owner, repo)
+		else:
+			default_branch = TEST_BRANCH
+
 		if scan_in_folder != "not_check":
 			num_examples = got_number_examples(repo_url, scan_in_folder, default_branch)
 		else:
@@ -187,85 +204,67 @@ def got_repositories():
 ########################################################################################################
 ########################################################################################################
 def got_example_folder(repo_name, scan_in_folder):
-    # Create a GitHub instance (anonymous access for public repos)
-    g = Github()
-
-    # Get the repository
-    repo = g.get_repo(repo_name)
-
-    # Get contents in scan_in_folder directory
-    contents = repo.get_contents(scan_in_folder)
-
-    # List folder names
-    
-    folders = [item.name for item in contents if item.type == "dir" and item.name not in excluded]
-    print("Total example:", len(folders))
-    return folders
+	# Create a GitHub instance with authentication for private repos
+	g = Github(PAT_TOKEN)
+	# Get the repository
+	repo = g.get_repo(repo_name)
+	# Get contents in scan_in_folder directory
+	contents = repo.get_contents(scan_in_folder)
+	# List folder names
+	folders = [item.name for item in contents if item.type == "dir" and item.name not in excluded]
+	print("Total example:", len(folders))
+	return folders
 
 def get_readme_headers(owner, repo, default_branch, folder):
-    url = f"https://raw.githubusercontent.com/{owner}/{repo}/{default_branch}/{folder}/README.md"
-    response = requests.get(url, headers=api_headers)
-    if response.status_code == 200:
-        content = response.text
-        # Extract level 1 headers (lines starting with exactly one '#')
-        headers = re.findall(r'(?m)^# (.+)', content)
-        headers_content = headers[0].replace("#", "")
-        return headers_content
-    else:
-        print("Failed to passing API in get_readme_headers() for: {0}, folder: {1}".format(repo, folder))
-        # print(f"Could not found level 1 headers (#) in README.md from {folder}")
-        sys.exit(1)
-
-# def got_example_title_templates(owner, repo, default_branch, folder):
-# 	# If repo contain templates.xml then scan .slcp files
-# 	if repo.find("energy_harvesting_applications") != -1:
-# 		url = f"https://raw.githubusercontent.com/{owner}/{repo}/{default_branch}/energy_harvesting_templates.xml"
-# 	else:
-# 		url = f"https://raw.githubusercontent.com/{owner}/{repo}/{default_branch}/templates.xml"
-# 	# print(url)
-# 	response = requests.get(url, headers=api_headers)
-# 	if response.status_code == 200:	
-# 		contents = response.text
-# 		headers = re.findall(r'.slcp', contents)
-# 		total_examples = len(headers)
-		
-# 		return total_examples	
+	# url = f"https://raw.githubusercontent.com/{owner}/{repo}/{default_branch}/{folder}/README.md"
+	url = f'https://api.github.com/repos/{owner}/{repo}/contents/{folder}/README.md?ref={default_branch}'
+	response = requests.get(url, headers=api_headers)
+	if response.status_code == 200:
+		content = response.text
+		# Extract level 1 headers (lines starting with exactly one '#')
+		headers = re.findall(r'(?m)^# (.+)', content)
+		headers_content = headers[0].replace("#", "")
+		return headers_content
+	else:
+		print("Failed to passing API in get_readme_headers() for: {0}, folder: {1}".format(repo, folder))
+		# print(f"Could not found level 1 headers (#) in README.md from {folder}")
+		sys.exit(1)
 
 def got_default_branch(owner, repo):
-    url = f"https://api.github.com/repos/{owner}/{repo}"
-    response = requests.get(url, headers=api_headers)
+	url = f"https://api.github.com/repos/{owner}/{repo}"
+	response = requests.get(url, headers=api_headers)
 
-    if response.status_code == 200:
-        data = response.json()
-        default_branch = data.get("default_branch")
-        return default_branch
-        
-    else:
-        print(f"Failed to passing API in got_default_branch() for repo:", repo)
-        sys.exit(1)
+	if response.status_code == 200:
+		data = response.json()
+		default_branch = data.get("default_branch")
+		return default_branch
+		
+	else:
+		print(f"Failed to passing API in got_default_branch() for repo:", repo)
+		sys.exit(1)
 
 def got_type_shield_io(owner, repo, default_branch, folder):
-    
-    url = f"https://raw.githubusercontent.com/{owner}/{repo}/{default_branch}/{folder}/README.md"
-    # print(url)
-    response = requests.get(url, headers=api_headers)
-    if response.status_code == 200:
-        content = response.text
-        try:
-            headers = re.findall(r'shields.io/badge/(.+)-salmon', content)
-            # print(headers)
-            shield_type = headers[0].replace("%20", " ")
-            return shield_type
-        except:
-           return None 
-    else:
-        print("Failed to passing API in got_type_shield_io() for repo: {0}, folder: {1}".format(repo, folder))
-        # sys.exit(1)
+	
+	# url = f"https://raw.githubusercontent.com/{owner}/{repo}/{default_branch}/{folder}/README.md"
+	url = f'https://api.github.com/repos/{owner}/{repo}/contents/{folder}/README.md?ref={default_branch}'
+	response = requests.get(url, headers=api_headers)
+	if response.status_code == 200:
+		content = response.text
+		try:
+			headers = re.findall(r'shields.io/badge/(.+)-salmon', content)
+			# print(headers)
+			shield_type = headers[0].replace("%20", " ")
+			return shield_type
+		except:
+		   return None 
+	else:
+		print("Failed to passing API in got_type_shield_io() for repo: {0}, folder: {1}".format(repo, folder))
+		# sys.exit(1)
 
 
 examples = []
 def got_example_shield():
-	json_file = os.path.join(curdir, "app/repository_info.json")
+	json_file = os.path.join(curdir, "data/repository_info_test.json")
 	with open(json_file, "r") as f:
 		json_data = json.load(f)
 
@@ -280,15 +279,22 @@ def got_example_shield():
 		owner, repo = split_repo_info(repo_url)
 		repo_name = owner + "/" + repo
 		print(80*"*")
-		print("Checking for:", repo_name)
+		print("Checking for repo:", repo_name)
 
-		default_branch = got_default_branch(owner, repo)
-		print(f"Default branch: {default_branch}")
+		
+		check_branch = check_branch_existing(owner, repo, TEST_BRANCH, PAT_TOKEN)
+		if check_branch == False:
+			default_branch = got_default_branch(owner, repo)
+		else:
+			default_branch = TEST_BRANCH
+
+		print(f"Checking for branch: {default_branch}")
 		folders = got_example_folder(repo_name, scan_in_folder)
 
 		for folder in folders:
 			if scan_in_folder != None:
 				folder = scan_in_folder + "/" + folder
+
 			app_type_shield = got_type_shield_io(owner, repo, default_branch, folder)
 			if app_type_shield != None:
 				readme_header = get_readme_headers(owner, repo, default_branch, folder)
@@ -314,7 +320,7 @@ applications = []
 def got_applications():
 	
 
-	json_file = os.path.join(curdir, "app/application_info.json")
+	json_file = os.path.join(curdir, "data/application_info.json")
 	with open(json_file, "r") as f:
 		json_data = json.load(f)
 
@@ -348,6 +354,7 @@ template = env.get_template('template/template.html')
 got_repositories()
 got_example_shield()
 got_applications()
+
 output = template.render(repositories=repositories, applications=applications, examples=examples)
 with open(os.path.join(current_dir, 'index.html'), 'w', encoding='utf-8') as f:
 	f.write(output)

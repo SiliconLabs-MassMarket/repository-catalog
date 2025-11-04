@@ -2,55 +2,55 @@
     {
         "name":"Bluetooth Applications",
         "tech":"Bluetooth",
-        "url":"https://github.com/SiliconLabsSoftware/bluetooth_applications",
+        "url":"https://github.com/SiliconLabsSoftware/bluetooth_applications_staging",
         "examples_folder":""
     },
     {
         "name":"Circuit Python Applications",
         "tech":"Platform",
-        "url":"https://github.com/SiliconLabsSoftware/circuitpython_applications",
+        "url":"https://github.com/SiliconLabsSoftware/circuitpython_applications_staging",
         "examples_folder":""
     },
     {
         "name":"Energy Harvesting Applications",
         "tech":"Platform, Bluetooth, Zigbee, SubGHz",
-        "url":"https://github.com/SiliconLabsSoftware/energy_harvesting_applications",
+        "url":"https://github.com/SiliconLabsSoftware/energy_harvesting_applications_staging",
         "examples_folder":"example"
     },
     {
         "name":"Matter Applications",
         "tech":"Matter",
-        "url":"https://github.com/SiliconLabsSoftware/matter_applications",
+        "url":"https://github.com/SiliconLabsSoftware/matter_applications_staging",
         "examples_folder":""
     },
     {
         "name":"Platform Applications",
         "tech":"Platform (EFM32, EFR32)",
-        "url":"https://github.com/SiliconLabsSoftware/platform_applications",
+        "url":"https://github.com/SiliconLabsSoftware/platform_applications_staging",
         "examples_folder":""
     },
     {
         "name":"Third Party Hardware drivers Extension",
         "tech":"Platform (EFM32, EFR32, 917)",
-        "url":"https://github.com/SiliconLabsSoftware/third_party_hw_drivers_extension",
-        "examples_folder":"app/example"
+        "url":"https://github.com/SiliconLabsSoftware/third_party_hw_drivers_extension_staging",
+        "examples_folder":"app/documentation/example"
     }, 
     {
         "name":"Zephyr Applications",
         "tech":"Platform (EFM32, EFR32), Bluetooth",
-        "url":"https://github.com/SiliconLabsSoftware/zephyr_applications",
+        "url":"https://github.com/SiliconLabsSoftware/zephyr_applications_staging",
         "examples_folder":"applications"
     },  
     {
         "name":"Zigbee Applications",
         "tech":"Zigbee",
-        "url":"https://github.com/SiliconLabsSoftware/zigbee_applications",
+        "url":"https://github.com/SiliconLabsSoftware/zigbee_applications_staging",
         "examples_folder":""
     }, 
     {
         "name":"OpenThread Applications",
         "tech":"Thread",
-        "url":"https://github.com/SiliconLabsSoftware/openthread_applications",
+        "url":"https://github.com/SiliconLabsSoftware/openthread_applications_staging",
         "examples_folder":""
     },  
     {
@@ -68,7 +68,7 @@
     {
         "name":"Peripheral WiseConnect",
         "tech":"Platform",
-        "url":"https://github.com/SiliconLabsSoftware/peripheral-examples-wiseconnect-sdk",
+        "url":"https://github.com/SiliconLabsSoftware/peripheral-examples-wiseconnect-sdk-staging",
         "examples_folder":""
     },  
     {

@@ -216,7 +216,7 @@
 				<td>{{ app.type }}</td>
 				<!-- <td>{{ app.rank }}</td> -->
 				<td>{{ app.no_examples }}</td>
-				<td>
+				<td style="text-align:left;">
 					{% set filtered_examples = examples | selectattr("app_type", "equalto", app.type) | list %}
 					{% for exp in filtered_examples %}
 					<a href="{{ exp.example_url }}" target="_blank">{{ exp.example_name }}</a><br>

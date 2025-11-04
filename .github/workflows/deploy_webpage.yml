@@ -2,7 +2,11 @@ name: app-dashboard
 
 on:
   workflow_dispatch:
-  
+    inputs:
+      branch:
+        description: 'Branch to scan shield of README files'
+        required: true
+
   schedule:
     # Runs every day at 00:00 UTC
     - cron: '5 0 * * *'
@@ -29,7 +33,12 @@ jobs:
 
       - name: Run report
         run: |
-          python3 generate_dashboard.py ${{ steps.app-token.outputs.token }}
+          if [ "${{ inputs.branch }}" != "" ]; then
+            python3 generate_dashboard_test.py ${{ steps.app-token.outputs.token }} ${{ inputs.branch }}
+          else
+            python3 generate_dashboard.py ${{ steps.app-token.outputs.token }}
+          fi
+          
       
       - name: Push new report
         run: |
