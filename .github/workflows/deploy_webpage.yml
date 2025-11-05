@@ -35,7 +35,7 @@ jobs:
       - name: Run report
         run: |
           if [ "${{ inputs.branch }}" != "default" ]; then
-            python3 generate_dashboard_test.py ${{ steps.app-token.outputs.token }} ${{ inputs.branch }}
+            python3 generate_dashboard_staging.py ${{ steps.app-token.outputs.token }} ${{ inputs.branch }}
           else
             python3 generate_dashboard.py ${{ steps.app-token.outputs.token }}
           fi

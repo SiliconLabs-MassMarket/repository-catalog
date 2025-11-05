@@ -1,0 +1,8 @@
+[
+    {
+        "name":"Platform Applications",
+        "tech":"Platform (EFM32, EFR32)",
+        "url":"https://github.com/SiliconLabsSoftware/platform_applications_staging",
+        "examples_folder":""
+    }
+]

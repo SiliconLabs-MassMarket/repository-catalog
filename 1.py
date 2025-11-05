@@ -165,7 +165,7 @@ def check_branch_existing(owner, repo, branch, token=None):
 ########################################################################################################
 repositories = []
 def got_repositories():
-	json_file = os.path.join(curdir, "data/repository_info_test.json")
+	json_file = os.path.join(curdir, "data/1.json")
 	with open(json_file, "r") as f:
 		json_data = json.load(f)
 
@@ -203,13 +203,16 @@ def got_repositories():
 
 ########################################################################################################
 ########################################################################################################
-def got_example_folder(repo_name, scan_in_folder):
+def got_example_folder(repo_name, scan_in_folder, branch=None):
 	# Create a GitHub instance with authentication for private repos
 	g = Github(PAT_TOKEN)
 	# Get the repository
 	repo = g.get_repo(repo_name)
-	# Get contents in scan_in_folder directory
-	contents = repo.get_contents(scan_in_folder)
+	# Get contents in scan_in_folder directory from specific branch
+	if branch:
+		contents = repo.get_contents(scan_in_folder, ref=branch)
+	else:
+		contents = repo.get_contents(scan_in_folder)
 	# List folder names
 	folders = [item.name for item in contents if item.type == "dir" and item.name not in excluded]
 	print("Total example:", len(folders))
@@ -249,7 +252,7 @@ def got_type_shield_io(owner, repo, default_branch, folder):
 	if response.status_code == 200:
 		content = response.text
 		try:
-			headers = re.findall(r'shields.io/badge/(.+?)-salmon', content, re.MULTILINE | re.DOTALL)
+			headers = re.findall(r'\!\[Type badge\]\(https://img.shields.io/badge/(.+?)-salmon', content, re.MULTILINE | re.DOTALL)
 			# Replace %20 with spaces for all matches and return the list
 			shield_types = [header.replace("%20", " ") for header in headers]
 			return shield_types
@@ -263,7 +266,7 @@ def got_type_shield_io(owner, repo, default_branch, folder):
 
 examples = []
 def got_example_shield():
-	json_file = os.path.join(curdir, "data/repository_info_test.json")
+	json_file = os.path.join(curdir, "data/1.json")
 	with open(json_file, "r") as f:
 		json_data = json.load(f)
 
@@ -288,9 +291,10 @@ def got_example_shield():
 			default_branch = TEST_BRANCH
 
 		print(f"Checking for branch: {default_branch}")
-		folders = got_example_folder(repo_name, scan_in_folder)
+		folders = got_example_folder(repo_name, scan_in_folder, default_branch)
 
 		for folder in folders:
+			print("Checking folder:", folder)
 			if scan_in_folder != None:
 				folder = scan_in_folder + "/" + folder
 
@@ -299,8 +303,10 @@ def got_example_shield():
 			
 			if len(list_app_type_shield) > 0:
 				readme_header = get_readme_headers(owner, repo, default_branch, folder)
+				print("222:", folder, " is: ", list_app_type_shield)
 			else:
 				# If README.md did not have App Type shield then ignore
+				print("1111:", folder)
 				continue
 
 			app_url = "https://github.com/" + repo_name + "/blob/" + default_branch + "/" + folder + "/README.md"
@@ -357,7 +363,7 @@ got_example_shield()
 got_applications()
 
 output = template.render(repositories=repositories, applications=applications, examples=examples)
-with open(os.path.join(current_dir, 'index.html'), 'w', encoding='utf-8') as f:
+with open(os.path.join(current_dir, '1.html'), 'w', encoding='utf-8') as f:
 	f.write(output)
 
 print("HTML report generated successfully!")
