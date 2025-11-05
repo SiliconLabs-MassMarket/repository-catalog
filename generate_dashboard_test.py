@@ -244,22 +244,21 @@ def got_default_branch(owner, repo):
 		sys.exit(1)
 
 def got_type_shield_io(owner, repo, default_branch, folder):
-	
-	# url = f"https://raw.githubusercontent.com/{owner}/{repo}/{default_branch}/{folder}/README.md"
 	url = f'https://api.github.com/repos/{owner}/{repo}/contents/{folder}/README.md?ref={default_branch}'
 	response = requests.get(url, headers=api_headers)
 	if response.status_code == 200:
 		content = response.text
 		try:
-			headers = re.findall(r'shields.io/badge/(.+)-salmon', content)
-			# print(headers)
-			shield_type = headers[0].replace("%20", " ")
-			return shield_type
-		except:
-		   return None 
+			headers = re.findall(r'shields.io/badge/(.+?)-salmon', content, re.MULTILINE | re.DOTALL)
+			# Replace %20 with spaces for all matches and return the list
+			shield_types = [header.replace("%20", " ") for header in headers]
+			return shield_types
+		except Exception as e:
+			print(f"Error parsing content: {e}")
+			return []
 	else:
 		print("Failed to passing API in got_type_shield_io() for repo: {0}, folder: {1}".format(repo, folder))
-		# sys.exit(1)
+		return []
 
 
 examples = []
@@ -295,8 +294,10 @@ def got_example_shield():
 			if scan_in_folder != None:
 				folder = scan_in_folder + "/" + folder
 
-			app_type_shield = got_type_shield_io(owner, repo, default_branch, folder)
-			if app_type_shield != None:
+			list_app_type_shield = got_type_shield_io(owner, repo, default_branch, folder)
+			
+			
+			if len(list_app_type_shield) > 0:
 				readme_header = get_readme_headers(owner, repo, default_branch, folder)
 			else:
 				# If README.md did not have App Type shield then ignore
@@ -305,14 +306,14 @@ def got_example_shield():
 			app_url = "https://github.com/" + repo_name + "/blob/" + default_branch + "/" + folder + "/README.md"
 			example_name = readme_header
 			example_url = app_url
-			app_type = app_type_shield
-
-			new_example = {
-				'example_name': example_name,
-				'example_url': example_url,
-				'app_type': app_type
-			}
-			examples.append(new_example)
+			
+			for app_type in list_app_type_shield:
+				new_example = {
+					'example_name': example_name,
+					'example_url': example_url,
+					'app_type': app_type
+				}
+				examples.append(new_example)
 
 ########################################################################################################
 ########################################################################################################
