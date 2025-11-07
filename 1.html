@@ -175,16 +175,16 @@
           </tr>
         </thead>
         <tbody>
-          {% for repo in repositories %}
+          
           <tr>
-            <td>{{ repo.no }}</td>
-            <td><a href="{{ repo.repo_url }}" target="_blank">{{ repo.repo_name }}</a></td>
-            <td>{{ repo.tech }}</td>
-            <td>{{ repo.num_examples }}</td>
-            <td>{{ repo.last_update }}</td>
-            <td>{{ repo.release_ver }}</td>
+            <td>0</td>
+            <td><a href="https://github.com/SiliconLabsSoftware/platform_applications_staging" target="_blank">Platform Applications</a></td>
+            <td>Platform (EFM32, EFR32)</td>
+            <td>112</td>
+            <td>2025-10-16</td>
+            <td>v2.10.0</td>
           </tr>
-          {% endfor %}	          
+          	          
         </tbody>
       </table>
       <p style="text-align: center;"><br>Copyright 2025 Silicon Laboratories. All rights reserved.</p><br>
@@ -208,19 +208,397 @@
           </tr>
         </thead>
         <tbody>
-          {% for app in applications %}
+          
           <tr>
-            <td>{{ app.type }}</td>
-            <!-- <td>{{ app.rank }}</td> -->
-            <td>{{ app.no_examples }}</td>
+            <td>Access Control</td>
+            <!-- <td>1</td> -->
+            <td>0</td>
             <td style="text-align:left;">
-              {% set filtered_examples = examples | selectattr("app_type", "equalto", app.type) | list %}
-              {% for exp in filtered_examples %}
-              <a href="{{ exp.example_url }}" target="_blank">{{ exp.example_name }}</a><br>
-              {% endfor %}
+              
+              
             </td>
           </tr>
-          {% endfor %}           
+          
+          <tr>
+            <td>Appliances</td>
+            <!-- <td>3</td> -->
+            <td>1</td>
+            <td style="text-align:left;">
+              
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_lcd_animation_blink/README.md" target="_blank">Platform - LCD Animation Blink </a><br>
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Asset Tracking</td>
+            <!-- <td>1</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Battery Powered Tools</td>
+            <!-- <td>2</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Battery Storage</td>
+            <!-- <td>2</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Circuit Breakers</td>
+            <!-- <td>3</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Commercial Lighting</td>
+            <!-- <td>2</td> -->
+            <td>1</td>
+            <td style="text-align:left;">
+              
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_dali/README.md" target="_blank">Platform - DALI Communication </a><br>
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Connected Outdoor</td>
+            <!-- <td>1</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Direction Finding</td>
+            <!-- <td>1</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Electric Submetering</td>
+            <!-- <td>2</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Electronic Shelf Labels</td>
+            <!-- <td>2</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Entertainment Devices</td>
+            <!-- <td>2</td> -->
+            <td>2</td>
+            <td style="text-align:left;">
+              
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_dali/README.md" target="_blank">Platform - DALI Communication </a><br>
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_i2s_mic_vdac/README.md" target="_blank">Platform - I2S Microphone VDAC </a><br>
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>EV Charging Stations</td>
+            <!-- <td>2</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Factory Automation</td>
+            <!-- <td>2</td> -->
+            <td>1</td>
+            <td style="text-align:left;">
+              
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_bldc_motor_controller/README.md" target="_blank">Platform - Brushless DC Motor Control </a><br>
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Human Machine Interface</td>
+            <!-- <td>2</td> -->
+            <td>1</td>
+            <td style="text-align:left;">
+              
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_keyscan/README.md" target="_blank">Platform - KeyScan </a><br>
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Industrial Wearables</td>
+            <!-- <td>2</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>IoT Gateways</td>
+            <!-- <td>3</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>LED Lighting</td>
+            <!-- <td>2</td> -->
+            <td>2</td>
+            <td style="text-align:left;">
+              
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_dali/README.md" target="_blank">Platform - DALI Communication </a><br>
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_multi_channel_pwm/README.md" target="_blank">Platform - Multi Channel PWM </a><br>
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Loss Prevention</td>
+            <!-- <td>2</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Portable Medical Devices</td>
+            <!-- <td>2</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Predictive Maintenance</td>
+            <!-- <td>2</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Process Automation</td>
+            <!-- <td>3</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Security Cameras</td>
+            <!-- <td>1</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Sensors</td>
+            <!-- <td>2</td> -->
+            <td>4</td>
+            <td style="text-align:left;">
+              
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_emu_temp_linearization/README.md" target="_blank">Platform - EMU Temperature Linearization </a><br>
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_energy_harvesting/README.md" target="_blank">Platform - Energy Harvesting Examples </a><br>
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_rht_baremetal/README.md" target="_blank">Platform - Si7021 RHT Sensor Bare-metal </a><br>
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_segmentLCD_lcsense/README.md" target="_blank">Platform - Segment LCD with LC Sensor </a><br>
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Smart Agriculture</td>
+            <!-- <td>2</td> -->
+            <td>1</td>
+            <td style="text-align:left;">
+              
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_rht_baremetal/README.md" target="_blank">Platform - Si7021 RHT Sensor Bare-metal </a><br>
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Smart Buildings</td>
+            <!-- <td>2</td> -->
+            <td>2</td>
+            <td style="text-align:left;">
+              
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_dali/README.md" target="_blank">Platform - DALI Communication </a><br>
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_rht_baremetal/README.md" target="_blank">Platform - Si7021 RHT Sensor Bare-metal </a><br>
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Smart Hospitals</td>
+            <!-- <td>2</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Smart HVAC</td>
+            <!-- <td>2</td> -->
+            <td>1</td>
+            <td style="text-align:left;">
+              
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_rht_baremetal/README.md" target="_blank">Platform - Si7021 RHT Sensor Bare-metal </a><br>
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Smart Locks</td>
+            <!-- <td>1</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Smart Metering</td>
+            <!-- <td>1</td> -->
+            <td>2</td>
+            <td style="text-align:left;">
+              
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_rht_baremetal/README.md" target="_blank">Platform - Si7021 RHT Sensor Bare-metal </a><br>
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_sine_null_points_detector/README.md" target="_blank">Platform - Sine null points detector </a><br>
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Smart Polar PV Systems</td>
+            <!-- <td>3</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Smart Wearable Devices</td>
+            <!-- <td>2</td> -->
+            <td>1</td>
+            <td style="text-align:left;">
+              
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_qi_rx_base/README.md" target="_blank">Platform - QI PRx communication protocol </a><br>
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Street Lighting</td>
+            <!-- <td>2</td> -->
+            <td>1</td>
+            <td style="text-align:left;">
+              
+              
+              <a href="https://github.com/SiliconLabsSoftware/platform_applications_staging/blob/feature/update_application_types//platform_dali/README.md" target="_blank">Platform - DALI Communication </a><br>
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>Switches</td>
+            <!-- <td>2</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+          
+          <tr>
+            <td>WiFi Access Points</td>
+            <!-- <td>2</td> -->
+            <td>0</td>
+            <td style="text-align:left;">
+              
+              
+            </td>
+          </tr>
+                     
         </tbody>
       </table>
       <p style="text-align: center;"><br>Copyright 2025 Silicon Laboratories. All rights reserved.</p><br>
